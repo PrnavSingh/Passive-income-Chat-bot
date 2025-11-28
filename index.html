@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>💸 Passive Income Advisor AI</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+      background-color: #f8f8f8;
+    }
+    #chat {
+      border: 1px solid #ccc;
+      padding: 1rem;
+      height: 400px;
+      overflow-y: auto;
+      background-color: white;
+      margin-bottom: 1rem;
+    }
+    .user {
+      text-align: right;
+      color: blue;
+      margin: 0.5rem 0;
+    }
+    .bot {
+      text-align: left;
+      color: green;
+      margin: 0.5rem 0;
+    }
+  </style>
+</head>
+<body>
+  <h2>Nrapendra Singh chauhan 12322925 68 </h2>
+  <h2>💬 Ask me anything about passive income</h2>
+  <div id="chat"></div>
+  <input type="text" id="userInput" placeholder="Type your question..." style="width: 75%;" />
+  <button onclick="sendMessage()">Send</button>
+
+  <script>
+    async function sendMessage() {
+      const input = document.getElementById("userInput");
+      const userText = input.value;
+      if (!userText) return;
+
+      const chatBox = document.getElementById("chat");
+      chatBox.innerHTML += `<div class="user">You: ${userText}</div>`;
+
+      input.value = "";
+
+      const response = await fetch("/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: userText })
+      });
+
+      const data = await response.json();
+      chatBox.innerHTML += `<div class="bot">Bot: ${data.reply}</div>`;
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+</body>
+</html>
